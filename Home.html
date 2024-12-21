@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap&font-display=swap" rel="stylesheet">
     <title>YalgarBet</title>
 </head>
 <style>
@@ -21,11 +21,9 @@
 
     h1 {
         font-family: "Dancing Script", serif;
-        text-align: left;
-        padding-top: 5px;
+        margin: 0;
     }
 
-    /* Sidebar with Sports and Casino buttons side by side */
     .sidebar {
         position: fixed;
         top: 0;
@@ -38,14 +36,13 @@
         align-items: center;
         padding-top: 20px;
         padding-bottom: 20px;
-        gap: 20px; /* Space between items */
+        gap: 20px;
     }
 
-    /* Sidebar buttons row */
     .sidebar-buttons {
         display: flex;
         flex-direction: row;
-        gap: 10px; /* Space between buttons */
+        gap: 10px;
     }
 
     .sidebar button {
@@ -60,68 +57,95 @@
         transition: all 0.3s ease;
     }
 
-    /* Button hover effect */
     .sidebar button:hover {
         background-color: #45a049;
         border-color: #388e3c;
     }
 
-    /* Made By section styling */
     .madeBy {
         text-align: center;
     }
 
-    /* Main Content Area */
     .main-content {
         margin-left: 220px;
         padding: 20px;
+    }
+
+    .fixed-row {
+        position: fixed;
+        top: 0;
+        left: 220px;
+        right: 0;
+        background-color: #1a2c38;
+        padding: 10px 20px;
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid #34495E;
     }
 
     .topright, .start {
         font-size: 16px;
         border-radius: 8px;
         padding: 10px;
-        margin: 5px;
         border: 2px solid black;
-        background-color: #333;
-        display: inline-block;
-    }
-
-    .topright {
-        position: absolute;
-        top: 10px;
-        right: 50px;
         background-color: #1475E1;
+        color: white;
+        text-decoration: none;
     }
 
-    .start {
+    .content {
+        margin-top: 70px;
+        background-color: #071824;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .visible {
+        display: block;
+    }
+
+    .imag1, .imag2 {
+        height: 500px;
+        width: 333px;
+        border-radius: 24px;
+    }
+
+    .flexbox {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        padding: 20px;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    .textblock {
+        font-size: 35px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    .backimage {
         position: absolute;
-        top: 10px;
-        right: 170px;
-        width: 90px;
-        background-color: #1475E1;
-    }
-
-    /* Focus effect for interactive elements */
-    .sidebar button:focus, .topright:focus, .start:focus {
-        border-color: #388e3c;
-    }
-
-    .madeBy{
-        font-size: 20px;
+        left: 0px;
+        top: 0px;
+        z-index: -1;
+        width: 100%;
+        height: 100vh;
+        object-fit: cover;
     }
 </style>
 
 <body>
-
-    <!-- Sidebar with fixed buttons (Casino and Sports) side by side -->
+    <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-buttons">
-            <button class="sports">Sports</button>
-            <button class="casino">Casino</button>
+            <button id="sportsBtn" class="sports">Sports</button>
+            <button id="casinoBtn" class="casino">Casino</button>
         </div>
-
-        <!-- Made by section -->
         <div class="madeBy">
             <p>Made by :</p>
             <p>Aryan Sheoran</p>
@@ -129,15 +153,62 @@
         </div>
     </div>
 
-    <!-- Main Content Area -->
+    <!-- Main Content -->
     <div class="main-content">
-        <!-- Fixed position buttons (Login, Register) -->
-        <button class="topright"><a href="sign-up.html" class="text-decoration-none text-white">Register</a></button>
-        <button class="start"><a href="login.html" class="text-decoration-none text-white">Login</a></button>
+        <!-- Fixed Row -->
+        <div class="fixed-row">
+            <h1>Yalgar Bet</h1>
+            <div>
+                <a href="login.html" class="start">Login</a>
+                <a href="sign-up.html" class="topright">Register</a>
+            </div>
+        </div>
 
-        <!-- Main header and content -->
-        <h1>Yalgar Bet</h1>
+        <!-- Scrollable Content -->
+        <div class="content">
+            <div id="homeContent" class="visible">
+                <div class="flexbox">
+                    <p class="textblock">"Experience the thrill of winning from the comfort of your home with YalgarBet!"</p>
+                    <img class="backimage" src="assets/backimage.png" alt="Casino background">
+                    <img class="imag1" src="assets/casino.webp" alt="Casino">
+                    <img class="imag2" src="assets/sports.webp" alt="Sports">
+                </div>
+            </div>
+            <div id="casinoContent" class="hidden">
+                <h1>Welcome to the Casino!</h1>
+                <p>Here is your casino-related content.</p>
+            </div>
+            <div id="sportsContent" class="hidden">
+                <h1>Welcome to Sports!</h1>
+                <p>Here is your sports-related content.</p>
+            </div>
+        </div>
     </div>
 
+    <script>
+        const casinoBtn = document.getElementById('casinoBtn');
+        const sportsBtn = document.getElementById('sportsBtn');
+        const casinoContent = document.getElementById('casinoContent');
+        const sportsContent = document.getElementById('sportsContent');
+        const homeContent = document.getElementById('homeContent');
+
+        casinoBtn.addEventListener('click', function () {
+            casinoContent.classList.add('visible');
+            casinoContent.classList.remove('hidden');
+            sportsContent.classList.add('hidden');
+            sportsContent.classList.remove('visible');
+            homeContent.classList.add('hidden');
+            homeContent.classList.remove('visible');
+        });
+
+        sportsBtn.addEventListener('click', function () {
+            sportsContent.classList.add('visible');
+            sportsContent.classList.remove('hidden');
+            casinoContent.classList.add('hidden');
+            casinoContent.classList.remove('visible');
+            homeContent.classList.add('hidden');
+            homeContent.classList.remove('visible');
+        });
+    </script>
 </body>
 </html>
