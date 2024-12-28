@@ -1,214 +1,485 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap&font-display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap&font-display=swap"
+      rel="stylesheet"
+    />
     <title>YalgarBet</title>
-</head>
-<style>
-    body {
-        background-color: #1A2C38;
+    <style>
+      body {
+        background-color: #1a2c38;
         color: white;
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
-    }
+        overflow-x: hidden; /* Prevent horizontal scrolling */
+      }
 
-    h1 {
+      h1 {
         font-family: "Dancing Script", serif;
-        margin: 0;
-    }
+      }
 
-    .sidebar {
+      .sidebar {
         position: fixed;
         top: 0;
         left: 0;
-        width: 200px;
+        width: 220px;
         height: 100vh;
-        background-color: #0F212E;
+        background-color: #0f212e;
         display: flex;
         flex-direction: column;
         align-items: center;
         padding-top: 20px;
-        padding-bottom: 20px;
         gap: 20px;
-    }
+        z-index: 1000; /* Ensure it stays on top */
+      }
 
-    .sidebar-buttons {
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
-    }
+      .sidebar-buttons {
+        display: flex; /* Arrange buttons in a row */
+        padding: 10px;
+        background-color: #1a2c38;
+        border-radius: 34px;
+        border: 2px solid #34495e;
+      }
 
-    .sidebar button {
-        width: 90px;
-        padding: 12px;
-        font-size: 14px;
+      .sports,
+      .casino {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #34495e;
         color: white;
-        background-color: #34495E;
-        border: 2px solid black;
-        border-radius: 8px;
-        text-align: center;
+        border: 2px solid transparent;
+        border-radius: 34px;
+        cursor: pointer;
         transition: all 0.3s ease;
-    }
+      }
 
-    .sidebar button:hover {
+      .sports:hover,
+      .casino:hover {
         background-color: #45a049;
+      }
+
+      .sports.focused,
+      .casino.focused {
         border-color: #388e3c;
-    }
+      }
 
-    .madeBy {
+      .madeBy {
         text-align: center;
-    }
+      }
 
-    .main-content {
-        margin-left: 220px;
+      .main-content {
+        margin-left: 201px; /* Offset the sidebar width */
         padding: 20px;
-    }
+        margin-right: 0;
+        padding-right: 0;
+      }
 
-    .fixed-row {
-        position: fixed;
+      .fixed-row {
+        position: sticky;
         top: 0;
-        left: 220px;
-        right: 0;
+        left: 220px; /* Align with the main content */
+        width: auto; /* Exclude the sidebar width */
+        height: 40px;
         background-color: #1a2c38;
         padding: 10px 20px;
-        z-index: 1000;
+        z-index: 999; /* Ensure it appears above content */
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom: 2px solid #34495E;
-    }
+        border-bottom: 2px solid #34495e;
+        box-sizing: border-box;
+        padding-top: 0;
+      }
 
-    .topright, .start {
+      .topright,
+      .start {
         font-size: 16px;
         border-radius: 8px;
         padding: 10px;
         border: 2px solid black;
-        background-color: #1475E1;
+        background-color: #1475e1;
         color: white;
         text-decoration: none;
-    }
+      }
 
-    .content {
-        margin-top: 70px;
+      .content {
         background-color: #071824;
-    }
+      }
 
-    .hidden {
+      .hidden {
         display: none;
-    }
+      }
 
-    .visible {
+      .visible {
         display: block;
-    }
+      }
 
-    .imag1, .imag2 {
-        height: 500px;
-        width: 333px;
-        border-radius: 24px;
-    }
-
-    .flexbox {
+      .row-container {
+        position: relative; /* Position for stacking child elements */
         display: flex;
-        flex-direction: row;
-        gap: 20px;
-        padding: 20px;
-        justify-content: space-evenly;
+        justify-content: space-between; /* Distribute elements across the width */
         align-items: center;
-    }
+        width: 100%; /* Make sure the row stretches across the full width */
+        padding: 20px;
+        gap: 20px;
+      }
 
-    .textblock {
-        font-size: 35px;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-    }
-
-    .backimage {
-        position: absolute;
-        left: 0px;
-        top: 0px;
-        z-index: -1;
+      .parent {
+        position: relative;
         width: 100%;
-        height: 100vh;
-        object-fit: cover;
-    }
-</style>
+      }
 
-<body>
+      .backtext {
+        position: absolute;
+        font-size: 400px;
+        rotate: -15deg;
+        object-fit: cover;
+        z-index: 0;
+        font-family: "Dancing Script", serif;
+        color: #11222e;
+        top: 0;
+        left: 50%;
+        transform: translate(
+          -50%,
+          -50%
+        ); /* Centers it both horizontally and vertically */
+        white-space: nowrap; /* Prevents the text from wrapping */
+        overflow: hidden; /* Ensures the text can be clipped if it exceeds the parent container */
+        width: 100%; /* Makes sure the text is allowed to extend across the full width */
+      }
+
+      .child {
+        position: relative;
+        display: flex;
+        justify-content: space-between; /* Align text, img1, and img2 in one row */
+        gap: 20px;
+        z-index: 1; /* Ensure this appears above the background */
+        color: white;
+        width: 100%; /* Stretch across the entire width */
+      }
+
+      .textblock {
+        font-size: 24px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        text-align: center;
+        align-items: center;
+        align-content: center;
+        flex: 1; /* Allow text to take up available space */
+      }
+
+      .imag1,
+      .imag2 {
+        height: 500px; /* Adjust the height as needed */
+        width: 30%; /* Ensure both images take up a portion of the width */
+        object-fit: cover;
+        border-radius: 16px;
+      }
+
+      .tik {
+        width: 100px;
+        height: 100px;
+        animation: scroll 60s linear infinite;
+      }
+
+      .slide-track {
+        width: 100%;
+        display: flex;
+        gap: 3em;
+        overflow: hidden;
+      }
+
+      .slider {
+        background-color: whitesmoke;
+      }
+
+      @keyframes scroll {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translatex(-1000%);
+        }
+      }
+
+      .bigcontainer {
+        display: flex;
+        background-color: #071d2a;
+        justify-content: center;
+        border-radius: 10px;
+        padding-top: 20px;
+        gap: 100px;
+      }
+
+      .flip1,
+      .flip2 {
+        height: 500px;
+        width: 500px;
+      }
+
+      .card-container {
+        perspective: 1000px; /* Enables the 3D effect */
+      }
+      .card {
+        width: 500px;
+        height: 500px;
+        position: relative;
+        transform-style: preserve-3d;
+        transform: rotateY(0deg);
+        transition: transform 0.6s;
+      }
+      .card.flip {
+        transform: rotateY(180deg);
+      }
+
+      .card-side {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        backface-visibility: hidden; /* This ensures the hidden side is not visible */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .card-front {
+        background-color: #ffffff;
+        z-index: 2; /* Ensure the front side is on top by default */
+      }
+
+      .card-side img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .flipboth {
+        width: 500px;
+        height: 500px;
+        object-fit: cover;
+      }
+
+      .card-back {
+        background-color: #000000;
+        transform: rotateY(180deg); /* Flip the back side by default */
+        z-index: 1;
+      }
+
+      .card-side .overlay-text {
+        position: absolute;
+        font-family: "Dancing Script", serif;
+        color: #c0c0c0;
+        font-size: 100px;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7),
+          0 0 5px rgba(255, 255, 255, 0.6);
+        text-align: center;
+        padding: 10px;
+        z-index: 2; /* Ensures the text is above the image */
+      }
+    </style>
+  </head>
+  <body>
     <!-- Sidebar -->
     <div class="sidebar">
-        <div class="sidebar-buttons">
-            <button id="sportsBtn" class="sports">Sports</button>
-            <button id="casinoBtn" class="casino">Casino</button>
-        </div>
-        <div class="madeBy">
-            <p>Made by :</p>
-            <p>Aryan Sheoran</p>
-            <p>Vishal Yadav</p>
-        </div>
+      <div class="sidebar-buttons">
+        <button id="sportsBtn" class="sports">Sports</button>
+        <button id="casinoBtn" class="casino">Casino</button>
+      </div>
+      <div class="madeBy">
+        <p>Made by :</p>
+        <p>Aryan Sheoran</p>
+        <p>Vishal Yadav</p>
+      </div>
     </div>
 
     <!-- Main Content -->
     <div class="main-content">
-        <!-- Fixed Row -->
-        <div class="fixed-row">
-            <h1>Yalgar Bet</h1>
-            <div>
-                <a href="login.html" class="start">Login</a>
-                <a href="sign-up.html" class="topright">Register</a>
+      <!-- Fixed Row -->
+      <div class="fixed-row">
+        <h1>Yalgar Bet</h1>
+        <div>
+          <a href="login.html" class="start">Login</a>
+          <a href="sign-up.html" class="topright">Register</a>
+        </div>
+      </div>
+
+      <!-- Scrollable Content -->
+      <div class="content">
+        <div id="homeContent" class="visible">
+          <div class="row-container">
+            <div class="parent">
+              <p class="backtext">Yal</p>
+              <div class="child">
+                <p class="textblock">
+                  "Experience the thrill of winning from the comfort of your
+                  home with YalgarBet!"
+                </p>
+                <img class="imag1" src="assets/casino.webp" alt="Casino" />
+                <img class="imag2" src="assets/sports.webp" alt="Sports" />
+              </div>
             </div>
+          </div>
+        </div>
+        <div id="casinoContent" class="hidden">
+          <h1>Welcome to the Casino!</h1>
+          <p>Here is your casino-related content.</p>
+        </div>
+        <div id="sportsContent" class="hidden">
+          <h1>Welcome to Sports!</h1>
+          <p>Here is your sports-related content.</p>
+        </div>
+      </div>
+      <div class="slider">
+        <div class="slide-track">
+          <div class="slide">
+            <img class="tik" src="logoslider/logo1.png" alt="logo1" />
+          </div>
+          <div class="slide">
+            <img class="tik" src="logoslider/logo2.png" alt="logo2" />
+          </div>
+          <div class="slide">
+            <img class="tik" src="logoslider/logo3.png" alt="logo3" />
+          </div>
+          <div class="slide">
+            <img class="tik" src="logoslider/logo4.png" alt="logo4" />
+          </div>
+          <div class="slide">
+            <img class="tik" src="logoslider/logo5.png" alt="logo5" />
+          </div>
+          <div class="slide">
+            <img class="tik" src="logoslider/logo6.png" alt="logo6" />
+          </div>
+          <div class="slide">
+            <img class="tik" src="logoslider/logo7.png" alt="logo7" />
+          </div>
+          <div class="slide">
+            <img class="tik" src="logoslider/logo8.png" alt="logo8" />
+          </div>
+          <div class="slide">
+            <img class="tik" src="logoslider/logo9.png" alt="logo9" />
+          </div>
+          <div class="slide">
+            <img class="tik" src="logoslider/logo10.png" alt="logo10" />
+          </div>
+          <div class="slide">
+            <img class="tik" src="logoslider/logo11.png" alt="logo11" />
+          </div>
+          <div class="slide">
+            <img class="tik" src="logoslider/logo12.png" alt="logo12" />
+          </div>
+          <div class="slide">
+            <img class="tik" src="logoslider/logo13.png" alt="logo13" />
+          </div>
+          <div class="slide">
+            <img class="tik" src="logoslider/logo14.png" alt="logo14" />
+          </div>
+          <div class="slide">
+            <img class="tik" src="logoslider/logo15.png" alt="logo15" />
+          </div>
+          <div class="slide">
+            <img class="tik" src="logoslider/logo16.png" alt="logo16" />
+          </div>
+          <div class="slide">
+            <img class="tik" src="logoslider/logo17.png" alt="logo17" />
+          </div>
+        </div>
+      </div>
+      <div class="bigcontainer">
+        <!-- First Card -->
+        <div class="card-container">
+          <div class="card" id="flipcard1">
+            <div class="card-side card-front">
+              <img class="flip2" src="assets/flip2.webp" alt="casino1" />
+              <p class="overlay-text">Welcome to Casino</p>
+            </div>
+            <div class="card-side card-back">
+              <img
+                class="flipboth"
+                src="assets/flipcasino.webp"
+                alt="flipcasino"
+              />
+            </div>
+          </div>
         </div>
 
-        <!-- Scrollable Content -->
-        <div class="content">
-            <div id="homeContent" class="visible">
-                <div class="flexbox">
-                    <p class="textblock">"Experience the thrill of winning from the comfort of your home with YalgarBet!"</p>
-                    <img class="backimage" src="assets/backimage.png" alt="Casino background">
-                    <img class="imag1" src="assets/casino.webp" alt="Casino">
-                    <img class="imag2" src="assets/sports.webp" alt="Sports">
-                </div>
+        <!-- Second Card -->
+        <div class="card-container">
+          <div class="card" id="flipcard2">
+            <div class="card-side card-front">
+              <img class="flip1" src="assets/flip1.webp" alt="sports1" />
+              <p class="overlay-text">Welcome to Sports</p>
             </div>
-            <div id="casinoContent" class="hidden">
-                <h1>Welcome to the Casino!</h1>
-                <p>Here is your casino-related content.</p>
+            <div class="card-side card-back">
+              <img
+                class="flipboth"
+                src="assets/flipsports.webp"
+                alt="flipspots"
+              />
             </div>
-            <div id="sportsContent" class="hidden">
-                <h1>Welcome to Sports!</h1>
-                <p>Here is your sports-related content.</p>
-            </div>
+          </div>
         </div>
+      </div>
     </div>
 
     <script>
-        const casinoBtn = document.getElementById('casinoBtn');
-        const sportsBtn = document.getElementById('sportsBtn');
-        const casinoContent = document.getElementById('casinoContent');
-        const sportsContent = document.getElementById('sportsContent');
-        const homeContent = document.getElementById('homeContent');
+      const casinoBtn = document.getElementById("casinoBtn");
+      const sportsBtn = document.getElementById("sportsBtn");
+      const casinoContent = document.getElementById("casinoContent");
+      const sportsContent = document.getElementById("sportsContent");
+      const homeContent = document.getElementById("homeContent");
 
-        casinoBtn.addEventListener('click', function () {
-            casinoContent.classList.add('visible');
-            casinoContent.classList.remove('hidden');
-            sportsContent.classList.add('hidden');
-            sportsContent.classList.remove('visible');
-            homeContent.classList.add('hidden');
-            homeContent.classList.remove('visible');
+      casinoBtn.addEventListener("click", function () {
+        casinoContent.classList.add("visible");
+        casinoContent.classList.remove("hidden");
+        sportsContent.classList.add("hidden");
+        sportsContent.classList.remove("visible");
+        homeContent.classList.add("hidden");
+        homeContent.classList.remove("visible");
+      });
+
+      sportsBtn.addEventListener("click", function () {
+        sportsContent.classList.add("visible");
+        sportsContent.classList.remove("hidden");
+        casinoContent.classList.add("hidden");
+        casinoContent.classList.remove("visible");
+        homeContent.classList.add("hidden");
+        homeContent.classList.remove("visible");
+      });
+
+      // Fliping the image
+      // Get the cards by their IDs or class names
+      const card1 = document.getElementById("flipcard1");
+      const card2 = document.getElementById("flipcard2");
+
+      // Function to add the 'flip' class when hovering over the card
+      const flipOnHover = (card) => {
+        card.addEventListener("mouseenter", () => {
+          card.classList.add("flip"); // Add the 'flip' class when the mouse enters the card
         });
 
-        sportsBtn.addEventListener('click', function () {
-            sportsContent.classList.add('visible');
-            sportsContent.classList.remove('hidden');
-            casinoContent.classList.add('hidden');
-            casinoContent.classList.remove('visible');
-            homeContent.classList.add('hidden');
-            homeContent.classList.remove('visible');
+        card.addEventListener("mouseleave", () => {
+          card.classList.remove("flip"); // Remove the 'flip' class when the mouse leaves the card
         });
+      };
+
+      // Apply the hover effect on both cards
+      flipOnHover(card1);
+      flipOnHover(card2);
     </script>
-</body>
+  </body>
 </html>
