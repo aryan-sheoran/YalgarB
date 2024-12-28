@@ -28,7 +28,7 @@
         position: fixed;
         top: 0;
         left: 0;
-        width: 200px;
+        width: 220px;
         height: 100vh;
         background-color: #0F212E;
         display: flex;
@@ -40,26 +40,49 @@
     }
 
     .sidebar-buttons {
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
+      position: relative;
+      width: 200px;
+      height: 50px;
+      background: #ddd;
+      border-radius: 25px;
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
     }
 
-    .sidebar button {
-        width: 90px;
-        padding: 12px;
-        font-size: 14px;
-        color: white;
-        background-color: #34495E;
-        border: 2px solid black;
-        border-radius: 8px;
-        text-align: center;
-        transition: all 0.3s ease;
+    .sidebar-buttons button {
+      flex: 1;
+      border: none;
+      background: none;
+      color: #555;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 1;
+      transition: color 0.3s ease;
     }
 
-    .sidebar button:hover {
-        background-color: #45a049;
-        border-color: #388e3c;
+    .sidebar-buttons .toggle-highlight {
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      background: #4caf50;
+      border-radius: 25px;
+      transition: left 0.3s ease, background 0.3s ease;
+      left: 0;
+      z-index: 0;
+      visibility: hidden; /* Start in a hidden state */
+      opacity: 0;
+      transition: left 0.3s ease, background 0.3s ease, opacity 0.3s ease;
+    }
+
+    .sidebar-buttons:not(.neutral) .toggle-highlight {
+      visibility: visible; /* Becomes visible after clicking */
+      opacity: 1;
+    }
+
+    .sidebar-buttons button.active {
+      color: #fff;
     }
 
     .madeBy {
@@ -142,10 +165,11 @@
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
-        <div class="sidebar-buttons">
+        <div class="sidebar-buttons neutral">
+            <div class="toggle-highlight"></div>
             <button id="sportsBtn" class="sports">Sports</button>
             <button id="casinoBtn" class="casino">Casino</button>
-        </div>
+          </div>
         <div class="madeBy">
             <p>Made by :</p>
             <p>Aryan Sheoran</p>
@@ -191,6 +215,8 @@
         const casinoContent = document.getElementById('casinoContent');
         const sportsContent = document.getElementById('sportsContent');
         const homeContent = document.getElementById('homeContent');
+        const sidebarButtons = document.querySelector(".sidebar-buttons");
+        const toggleHighlight = document.querySelector(".toggle-highlight");
 
         casinoBtn.addEventListener('click', function () {
             casinoContent.classList.add('visible');
@@ -208,6 +234,25 @@
             casinoContent.classList.remove('visible');
             homeContent.classList.add('hidden');
             homeContent.classList.remove('visible');
+        });
+        
+        //Creating toogle buttons
+        sportsBtn.addEventListener("click", () => {
+        sidebarButtons.classList.remove("neutral"); // Remove neutral state
+        toggleHighlight.style.left = "0"; // Move highlight to Sports
+        toggleHighlight.style.background = "#4caf50"; // Green for Sports
+        toggleHighlight.style.visibility = "visible"; // Ensure visibility
+        sportsBtn.classList.add("active");
+        casinoBtn.classList.remove("active");
+        });
+
+        casinoBtn.addEventListener("click", () => {
+        sidebarButtons.classList.remove("neutral"); // Remove neutral state
+        toggleHighlight.style.left = "50%"; // Move highlight to Casino
+        toggleHighlight.style.background = "#4caf50";
+        toggleHighlight.style.visibility = "visible"; // Ensure visibility
+        casinoBtn.classList.add("active");
+        sportsBtn.classList.remove("active");
         });
     </script>
 </body>
