@@ -34,7 +34,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding-top: 20px;
+        justify-content: space-between;
+        padding-top: 0px;
         padding-bottom: 20px;
         gap: 20px;
     }
@@ -43,7 +44,7 @@
       position: relative;
       width: 200px;
       height: 50px;
-      background: #ddd;
+      background: #0f212e;
       border-radius: 25px;
       box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
       display: flex;
@@ -160,21 +161,46 @@
         height: 100vh;
         object-fit: cover;
     }
+
+    .button-container{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px;
+      padding-bottom: 10px;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, .2), 0 4px 6px -2px rgba(0, 0, 0, .1);;
+    }
+
+    .button-leftout{
+      display: flex;
+      width: 100%;
+      height: 90%;
+      flex-direction: column;
+      
+    }
+
+    
+
 </style>
 
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
+      <div class="button-container">
         <div class="sidebar-buttons neutral">
             <div class="toggle-highlight"></div>
             <button id="sportsBtn" class="sports">Sports</button>
             <button id="casinoBtn" class="casino">Casino</button>
           </div>
+        </div>
+        <div class="button-leftout">
         <div class="madeBy">
             <p>Made by :</p>
             <p>Aryan Sheoran</p>
             <p>Vishal Yadav</p>
         </div>
+      </div>
     </div>
 
     <!-- Main Content -->
