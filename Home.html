@@ -180,7 +180,65 @@
       
     }
 
-    
+    .partsA{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      background-color: #1a2c38;
+      justify-content: center;
+      justify-items: center;
+      align-items: center;
+      gap: 10px;
+      border-radius: 8px;
+    }
+
+    .partsA1{
+      width: 80%;
+      text-align: center;
+      background-color: #1a2c38;
+      padding: 13px 16px;
+      color: white;
+      border: none;
+      margin-left: 20px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+      border-radius: 3px;
+    }
+
+    .partsA1:hover {
+    background-color: #2f4553; /* Change color on hover */
+    }
+
+    .partsB{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      background-color: #1a2c38;
+      justify-content: center;
+      justify-items: center;
+      align-items: center;
+      gap: 10px;
+      border-radius: 8px;
+    }
+
+    .partsB1{
+      width: 80%;
+      text-align: center;
+      background-color: #1a2c38;
+      padding: 13px 16px;
+      color: white;
+      border-radius: 3px;
+      border: none;
+      margin-left: 20px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    .partsB1:hover {
+    background-color: #2f4553; /* Change color on hover */
+    }
 
 </style>
 
@@ -195,10 +253,25 @@
           </div>
         </div>
         <div class="button-leftout">
-        <div class="madeBy">
+        <div class="madeBy" id="visible">
             <p>Made by :</p>
             <p>Aryan Sheoran</p>
             <p>Vishal Yadav</p>
+        </div>
+        <div class="hidden" id="sportsOption">
+          <div class="partA">
+            <button id="liveEvents" class="partsA1">Live Events</button>
+            <button id="startingSoon" class="partsA1">Starting Soon</button>
+            <button id="myBets" class="partsA1">My Bets</button>
+          </div>
+        </div>
+        <div class="hidden" id="casinoOption">
+          <div class="partB">
+            <button id="Favourites" class="partsB1">Favourites</button>
+            <button id="Recent" class="partsB1">Recent</button>
+            <button id="Challenges" class="partsB1">Challenges</button>
+            <button id="myBets" class="partsB1">My Bets</button>
+          </div>
         </div>
       </div>
     </div>
@@ -280,6 +353,44 @@
         casinoBtn.classList.add("active");
         sportsBtn.classList.remove("active");
         });
+
+
+
+
+        // Showing options when clicked
+        const sportsOption = document.getElementById('sportsOption');
+        const casinoOption = document.getElementById('casinoOption');
+        const madeBy = document.getElementById('visible');
+
+        sportsBtn.addEventListener('click' , ()=>{
+          sportsOption.classList.add('visible');
+          sportsOption.classList.remove('hidden');
+
+          casinoOption.classList.add('hidden');
+          casinoOption.classList.remove('visible');
+
+          madeBy.classList.add('hidden');
+          madeBy.classList.remove('visible');
+
+          toggleHighlight.style.visibility = "visible"; // Ensure visibility
+          toggleHighlight.style.opacity = "1"; // Ensure opacity is set
+
+        })
+
+        casinoBtn.addEventListener('click' , () =>{
+          casinoOption.classList.add('visible');
+          casinoOption.classList.remove('hidden');
+          
+          sportsOption.classList.add('hidden');
+          sportsOption.classList.remove('visible');
+
+          madeBy.classList.add('hidden');
+          madeBy.classList.remove('visible');
+
+          toggleHighlight.style.visibility = "visible"; // Ensure visibility
+          toggleHighlight.style.opacity = "1"; // Ensure opacity is set
+
+        })
     </script>
 </body>
 </html>
