@@ -342,23 +342,173 @@
       align-self: center;
     }
 
-    .gojo{
+    .gojo {
       width: 100%;
       display: flex;
       margin-top: 10px;
       padding-bottom: 10px;
       flex-direction: column;
       align-items: center;
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, .2), 0 4px 6px -2px rgba(0, 0, 0, .1);;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, .2), 0 4px 6px -2px rgba(0, 0, 0, .1);
+      ;
     }
 
-    .geto{
+    .geto {
       width: 100%;
       height: 90%;
       display: flex;
       flex-direction: column;
     }
 
+    .partA {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      background-color: #0f212e;
+      justify-content: center;
+      justify-items: center;
+      align-items: center;
+      border-radius: 8px;
+    }
+
+    .partA1 {
+      border: none;
+      border-radius: 3px;
+      width: 70%;
+      text-align: center;
+      background-color: #1a2c38;
+      padding: 13px 16px;
+      color: white;
+      margin-left: 0px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+
+    .partA1:hover {
+      background-color: #2f4553;
+      /*Change color when hover*/
+    }
+
+
+    .partB {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      background-color: #0f212e;
+      justify-content: center;
+      justify-items: center;
+      align-items: center;
+      border-radius: 8px;
+    }
+
+    .partB1 {
+      border: none;
+      border-radius: 3px;
+      width: 80%;
+      text-align: center;
+      background-color: #1a2c38;
+      padding: 13px 16px;
+      color: white;
+      margin-left: 0px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+
+    .partB1:hover {
+      background-color: #2f4553;
+      /*Change color when hover*/
+    }
+
+
+    .partC {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      background-color: #0f212e;
+      justify-content: center;
+      justify-items: center;
+      align-items: center;
+      border-radius: 8px;
+    }
+
+    .partC1 {
+      border: none;
+      border-radius: 3px;
+      width: 70%;
+      text-align: center;
+      background-color: #1a2c38;
+      padding: 13px 16px;
+      color: white;
+      margin-left: 0px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+
+    .partC1:hover {
+      background-color: #2f4553;
+      /*Change color when hover*/
+    }
+
+    .partC11 {
+      margin-top: 20px;
+      margin-bottom: 0px;
+      height: 50px;
+      padding: 12px 16px;
+      align-items: center;
+      text-align: start;
+      width: 70%;
+      padding-left: 8px;
+      background-color: #1a2c38;
+      font-size: 14px;
+    }
+
+    .abcdef {
+      height: 2px;
+      width: 70%;
+      background: #2f4553;
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+
+    .sidebar .geto {
+      overflow-y: auto;
+      height: calc(100vh - 100px);
+      /* Adjust the height as needed */
+
+      /* Scrollbar styling for Firefox */
+      scrollbar-width: thin;
+      /* Makes the scrollbar thinner */
+      scrollbar-color: #0f212e;
+      /* Thumb color and track color */
+    }
+
+    /* Scrollbar styling for Webkit (Chrome, Safari, Edge) */
+    .sidebar .geto::-webkit-scrollbar {
+      width: 4px;
+      /* Adjust scrollbar width */
+    }
+
+    .sidebar .geto::-webkit-scrollbar-track {
+      background: #0f212e;
+      /* Background of the scrollbar track */
+    }
+
+    .sidebar .geto::-webkit-scrollbar-thumb {
+      background-color: #2f4553;
+      /* Color of the scrollbar thumb */
+      border-radius: 10px;
+      /* Rounded edges for the thumb */
+      border: 2px solid #2f4553;
+      /* Add some padding-like effect */
+    }
+
+    .sidebar .geto::-webkit-scrollbar-thumb:hover {
+      background-color: #2f4553;
+      /* Darker color on hover */
+    }
   </style>
 </head>
 
@@ -366,19 +516,51 @@
   <!-- Sidebar -->
   <div class="sidebar">
     <div class="gojo">
-    <div class="sidebar-buttons neutral" id="sidebarButtons">
-      <div class="toggle-highlight" id="toggle-highlight"></div>
-      <button id="sportsBtn" class="sports">Sports</button>
-      <button id="casinoBtn" class="casino">Casino</button>
+      <div class="sidebar-buttons neutral" id="sidebarButtons">
+        <div class="toggle-highlight" id="toggle-highlight"></div>
+        <button id="sportsBtn" class="sports">Sports</button>
+        <button id="casinoBtn" class="casino">Casino</button>
+      </div>
     </div>
-  </div>
-  <div class="geto">
-    <div class="madeBy">
-      <p>Made by :</p>
-      <p>Aryan Sheoran</p>
-      <p>Vishal Yadav</p>
+    <div class="geto">
+      <div class="madeBy" id="visible">
+        <p>Made by :</p>
+        <p>Aryan Sheoran</p>
+        <p>Vishal Yadav</p>
+      </div>
+      <div class="hidden" id="sportsOption">
+        <div class="partA">
+          <button id="liveEvents" class="partA1">Live Event</button>
+          <button id="startingSoon" class="partA1">Starting Soon</button>
+          <button id="myBets" class="partA1">My Bets</button>
+        </div>
+        <div class="partC">
+          <p class="partC11">Top Sports</p>
+          <hr class="abcdef">
+          <button id="cricket" class="partC1">Cricket</button>
+          <button id="football" class="partC1">Football</button>
+          <button id="Kabbadi" class="partC1">Kabbadi</button>
+          <button id="KhoKho" class="partC1">Kho-Kho</button>
+          <button id="Badminton" class="partC1">Badminton</button>
+          <button id="Chess" class="partC1">Chess</button>
+          <button id="TabbleTennis" class="partC1">Table Tennis</button>
+          <button id="carrom" class="partC1">Carrom</button>
+          <button id="LaunTennis" class="partC1">Laun Tennis</button>
+          <button id="Basketball" class="partC1">Basketball</button>
+          <button id="WeightLifting" class="partC1">Weight Lifting</button>
+          <button id="Vollyball" class="partC1">Vollyball</button>
+          <button id="Athletics" class="partC1">Athletics</button>
+        </div>
+      </div>
+      <div class="hidden" id="casinoOption">
+        <div class="partB">
+          <button id="Favourites" class="partB1">Favourites</button>
+          <button id="Recent" class="partB1">Recent</button>
+          <button id="Challenges" class="partB1">Challenges</button>
+          <button id="mybets" class="partB1">My Bets</button>
+        </div>
+      </div>
     </div>
-  </div>
   </div>
 
   <!-- Main Content -->
@@ -387,13 +569,13 @@
     <div class="fixed-row">
       <h1>Yalgar Bet</h1>
       <div>
-        <a href="login.html" class="start">Login</a>
-        <a href="sign-up.html" class="topright">Register</a>
+        <a href="Register/login.html" class="start">Login</a>
+        <a href="Register/sign-up.html" class="topright">Register</a>
       </div>
     </div>
 
     <!-- Scrollable Content -->
-    <div class="content">
+    <div class="content" id="content">
       <div id="homeContent" class="visible">
         <div class="row-container">
           <div class="parent">
@@ -401,7 +583,7 @@
             <div class="child">
               <p class="textblock">
                 "Experience the thrill of winning from the comfort of your
-                home with YalgarBet!"
+                hostels with YalgarBet!"
               </p>
               <img class="imag1" src="assets/casino.webp" alt="Casino" />
               <img class="imag2" src="assets/sports.webp" alt="Sports" />
@@ -502,100 +684,7 @@
     </div>
   </div>
   </div>
-
-  <script>
-    const casinoBtn = document.getElementById("casinoBtn");
-    const sportsBtn = document.getElementById("sportsBtn");
-    const casinoContent = document.getElementById("casinoContent");
-    const sportsContent = document.getElementById("sportsContent");
-    const homeContent = document.getElementById("homeContent");
-    const toggleHighlight = document.getElementById("toggle-highlight");
-    const logoSlider = document.getElementById("logo-slider");
-    const bigContainer = document.getElementById("bigContainer");
-    const problemA = document.getElementById("problemA");
-    const problemB = document.getElementById("problemB");
-
-
-    sportsBtn.addEventListener('click', function () {
-      sportsContent.classList.add('visible');
-      sportsContent.classList.remove('hidden');
-      casinoContent.classList.add('hidden');
-      casinoContent.classList.remove('visible');
-      homeContent.classList.add('hidden');
-      homeContent.classList.remove('visible');
-
-      logoSlider.classList.add('hidden');
-      logoSlider.classList.remove('visible');
-
-      problemA.classList.add('hidden');
-      problemA.classList.remove('visible')
-
-      problemB.classList.add('hidden');
-      problemB.classList.remove('visible')
-    });
-
-    casinoBtn.addEventListener('click', function () {
-      casinoContent.classList.add('visible');
-      casinoContent.classList.remove('hidden');
-
-      sportsContent.classList.remove('visible');
-      sportsContent.classList.add('hidden');
-
-      homeContent.classList.add('hidden');
-      homeContent.classList.remove('visible');
-
-      logoSlider.classList.add('hidden');
-      logoSlider.classList.remove('visible');
-
-      problemA.classList.add('hidden');
-      problemA.classList.remove('visible')
-
-      problemB.classList.add('hidden');
-      problemB.classList.remove('visible')
-
-    });
-
-    // Toggle button
-    sportsBtn.addEventListener("click", () => {
-      sidebarButtons.classList.remove("neutral");  // Remove neutral state
-      toggleHighlight.style.left = "0"; // Move highlights to sports
-      toggleHighlight.style.background = "#4caf50"; // Green for sports
-      toggleHighlight.style.visibility = "visible"; // Ensure visibility
-      toggleHighlight.style.borderRadius = "0px 25px 25px 0px"; // Maintain rounded edges
-      sportsBtn.classList.add("active");
-      casinoBtn.classList.remove("active");
-    });
-
-    casinoBtn.addEventListener("click", () => {
-      sidebarButtons.classList.remove("neutral");  // Remove thr neutral state
-      toggleHighlight.style.left = "50%"; // Move highlight to casino
-      toggleHighlight.style.background = "#4caf50"; // Green for casino
-      toggleHighlight.style.visibility = "visible"; //Ensure visibilty
-      toggleHighlight.style.borderRadius = "25px 0px 0px 25px"; // Maintain rounded edges
-      casinoBtn.classList.add("active");
-      sportsBtn.classList.remove("active");
-    });
-
-    // Fliping the image
-    // Get the cards by their IDs or class names
-    const card1 = document.getElementById("flipcard1");
-    const card2 = document.getElementById("flipcard2");
-
-    // Function to add the 'flip' class when hovering over the card
-    const flipOnHover = (card) => {
-      card.addEventListener("mouseenter", () => {
-        card.classList.add("flip"); // Add the 'flip' class when the mouse enters the card
-      });
-
-      card.addEventListener("mouseleave", () => {
-        card.classList.remove("flip"); // Remove the 'flip' class when the mouse leaves the card
-      });
-    };
-
-    // Apply the hover effect on both cards
-    flipOnHover(card1);
-    flipOnHover(card2);
-  </script>
+  <script src="script.js"></script>
 </body>
 
 </html>
